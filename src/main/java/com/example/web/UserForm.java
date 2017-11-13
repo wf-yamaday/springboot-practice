@@ -13,4 +13,10 @@ public class UserForm {
 	@NotNull
 	@Size(min=1,max=30)
 	private String lastName;
+	@NotNull
+	@Size(min=1)
+	private String mail;
+	@NotNull
+	@Size(min=1,max=32)
+	private String password;
 }

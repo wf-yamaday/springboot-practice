@@ -2,9 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>ユーザー情報</title>
+<title>ユーザー登録</title>
 </head>
 <body>
+<h1>ユーザー登録</h1>
 <div>
 	<form th:action="@{user/create}" th:object="${userForm}" method="post">
 		<dl>
@@ -17,17 +18,27 @@
 			<dd>
 				<input type="text" id="firstName" name="firstName" th:field="*{firstName}" th:errorclass="error-input" value="太郎" />
 				<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-messages">error!</span>
-				</dd>
+			</dd>
+			<dt><label for="mail">メールアドレス</label></dt>
+			<dd>
+				<input type="text" id="mail" name="mail" th:field="*{mail}" th:errorclass="error-input" value="メールアドレス" />
+				<span th:if="${#fields.hasErrors('mail')}" th:error="*{mail}" class="error-messages">error!</span>
+			</dd>
+			<dt><label for="password">パスワード</label></dt>
+			<dd>
+				<input type="text" id="password" name="password" th:field="*{password}" th:errorclass="error-input" value="パスワード" />
+				<span th:if="${#fields.hasErrors('password')}" th:error="*{password}" class="error-messages">error!</span>
+			</dd>
 		</dl>
-		<input type="submit" value="作成" />
+		<input type="submit" value="登録" />
 	</form>
 </div>
-<table>
+<!--  <table> 
 	<tr th:each="user : ${users}">
 		<td th:text="${user.id}">100</td>
 		<td th:text="${user.lastName}">山田</td>
 		<td th:text="${user.firstName}">太郎</td>
 	</tr>
-</table>
+</table>  -->
 </body>
 </html>
