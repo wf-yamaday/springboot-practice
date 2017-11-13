@@ -41,8 +41,7 @@ public class UserController {
 		}
 		User user = new User();
 		BeanUtils.copyProperties(form,user);
-		userService.create(user);
+		userService.create(user ,form.getPassword());
 		return "redirect:/user";
 	}
-
 }

@@ -2,10 +2,9 @@ package com.example.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureTestEntityManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.domain.User;
@@ -16,12 +15,16 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	public List<User> findAll(){
 		return userRepository.findAll();
 	}
 	
-	public User create(User user){
+	public User create(User user,String rawPassword){
+		String encodedPassword  = passwordEncoder.encode(rawPassword);
+		user.setEncodedPassword(encodedPassword);
 		return userRepository.save(user);
 	}
 }
