@@ -23,8 +23,9 @@ public class UserService {
 	}
 	
 	public User create(User user,String rawPassword){
+		//パスワードをハッシュ化して保存
 		String encodedPassword  = passwordEncoder.encode(rawPassword);
-		user.setEncodedPassword(encodedPassword);
+		user.setPassword(encodedPassword);
 		return userRepository.save(user);
 	}
 }
