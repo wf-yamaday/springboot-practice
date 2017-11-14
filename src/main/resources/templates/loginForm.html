@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>ログイン</title>
+</head>
+<body>
+	<h1>ログイン</h1>
+	<form method="post" th:action="@{/login}" >
+		<div th:if="${param.error}" >ユーザー名またはパスワードが違います．</div>
+		<input type="text" name="mail" placehplder="e-mail" required="required" autofocus="autofocus" />
+		<input type="password" name="password" placehpolder="Password" required="required" />
+		<input type="submit" />
+	</form>
+</body>
+</html>
