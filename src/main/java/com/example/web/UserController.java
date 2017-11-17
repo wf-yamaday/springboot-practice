@@ -1,5 +1,6 @@
 package com.example.web;
 
+
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -18,31 +19,42 @@ import com.example.service.UserService;
 
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/")//このコントローラ全体が動作するパス
 public class UserController {
 	@Autowired
 	UserService userService;
 	
+	//新規ユーザー登録フォーム
 	@ModelAttribute
-	UserForm setUpForm() {
-		return new UserForm();
-		}
-	@GetMapping
-	String list(Model model){
-		List<User> users = userService.findAll();
-		model.addAttribute("users",users);
-		return "list";
+	RegistUserForm registUserForm(){
+		return new RegistUserForm();
+	}
+	@GetMapping(path="registUserForm")
+	String regist(Model model){
+		return "registUserForm";
 	}
 	
-	@PostMapping(path="create")
-	String create(@Validated UserForm form, BindingResult result,Model model) {
-		if(result.hasErrors()){
-			return list(model);
+	@GetMapping("/top")
+	String top(){
+		return "top";
+	}
+	
+	/*String list(Model model){
+		List<User> users = userService.findAll();
+		model.addAllAttributes(users);
+		return "user/list";
+	}*/
+	
+	//新規登録
+	@PostMapping(path="create")//新規登録のpostリクエストを受けるパス
+	String create(@Validated RegistUserForm form , BindingResult result , Model model){
+		if(result.hasErrors()){ //エラーがおきたら返す場所
+			return "/registUserForm";
 		}
 		User user = new User();
-		BeanUtils.copyProperties(form,user);
-		userService.create(user);
-		return "redirect:/user";
+		BeanUtils.copyProperties(form, user);
+		userService.create(user, user.getPassword());
+		return "redirect:/loginForm"; //成功したら返す場所
 	}
-
+	
 }

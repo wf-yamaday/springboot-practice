@@ -2,12 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>ユーザー登録</title>
+<title>新規登録</title>
 </head>
 <body>
-<h1>ユーザー登録</h1>
-<div>
-	<form th:action="@{user/create}" th:object="${userForm}" method="post">
+	<h1>新規ユーザー登録</h1>
+	<form th:action="@{/create}" th:object="${registUserForm}" method="post"><!-- どこでフォームを処理するか -->
 		<dl>
 			<dt><label for="lastName">性</label></dt>
 			<dd>
@@ -32,13 +31,5 @@
 		</dl>
 		<input type="submit" value="登録" />
 	</form>
-</div>
-<!--  <table> 
-	<tr th:each="user : ${users}">
-		<td th:text="${user.id}">100</td>
-		<td th:text="${user.lastName}">山田</td>
-		<td th:text="${user.firstName}">太郎</td>
-	</tr>
-</table>  -->
 </body>
 </html>

@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,13 +19,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class User {
 	
-	@Id
-	@GeneratedValue
-	private int id;
-	@Column(name="first_name",nullable=false )
+	@Id //primary key
+	@Column(name="mail",nullable=false)
+	private String mail;
+	//@JoinColumn(name="") で外部キーの指定ができる
+	@Column(name="first_name",nullable=false)
 	private String firstName;
-	@Column(name="last_name",nullable=false )
+	@Column(name="last_name",nullable=false)
 	private String lastName;
+	@Column(name="password",nullable=false)
+	@JsonIgnore
+	private String password;
 	
-
 }
