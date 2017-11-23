@@ -4,24 +4,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.example.domain.User;
-import com.example.repository.UserRepository;
+import com.example.domain.Seller;
+import com.example.repository.SellerRepository;
 
-
-@Service(value="user")
-public class LoginUserDetailsService implements UserDetailsService{
+@Service(value="seller")
+public class SellerUserDetailsService implements UserDetailsService{
 	@Autowired
-	UserRepository userRepository;
+	SellerRepository sellerRepository;
 	
 	@Override
-	public UserDetails loadUserByUsername(String mail) throws UsernameNotFoundException {
-		User user = userRepository.findOne(mail);
-		if(user == null){
+	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException{
+		Seller seller = sellerRepository.findOne(id);
+		if(seller == null){
 			throw new UsernameNotFoundException("The requested user is not found.");
 		}
-		return new LoginUserDetails(user);
+		return new SellerUserDetails(seller);
 	}
+
 }
